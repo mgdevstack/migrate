@@ -18,6 +18,47 @@ import (
 	pipep "gopkg.in/mattes/migrate.v1/pipe"
 )
 
+// GoTo migrates up or down to get the database to a specific version
+func GoTo(pipe chan interface{}, url, migrationsPath string, targetVersion uint64) {
+	d, files, version, err := initDriverAndReadMigrationFilesAndGetVersion(url, migrationsPath)
+	if err != nil {
+		go pipep.Close(pipe, err)
+		return
+	}
+
+	applyMigrationFiles, err := files.ToSpecific(version, targetVersion)
+	if err != nil {
+		if err2 := d.Close(); err2 != nil {
+			pipe <- err2
+		}
+		go pipep.Close(pipe, err)
+		return
+	}
+
+	signals := handleInterrupts()
+	defer signal.Stop(signals)
+
+	if len(applyMigrationFiles) > 0 {
+		for _, f := range applyMigrationFiles {
+			pipe1 := pipep.New()
+			go d.Migrate(f, pipe1)
+			if ok := pipep.WaitAndRedirect(pipe1, pipe, signals); !ok {
+				break
+			}
+		}
+		if err := d.Close(); err != nil {
+			pipe <- err
+		}
+		go pipep.Close(pipe, nil)
+		return
+	}
+	if err := d.Close(); err != nil {
+		pipe <- err
+	}
+	go pipep.Close(pipe, nil)
+	return
+}
+
 // Up applies all available migrations
 func Up(pipe chan interface{}, url, migrationsPath string) {
 	d, files, version, err := initDriverAndReadMigrationFilesAndGetVersion(url, migrationsPath)
