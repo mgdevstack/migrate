@@ -1,6 +1,6 @@
 // Package main is the CLI.
 // You can use the CLI via Terminal.
-// import "gopkg.in/mattes/migrate.v1/migrate" for usage within Go.
+// import "github.com/mgdevstack/migrate/migrate" for usage within Go.
 package main
 
 import (
@@ -11,19 +11,19 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	_ "gopkg.in/mattes/migrate.v1/driver/bash"
-	_ "gopkg.in/mattes/migrate.v1/driver/cassandra"
-	_ "gopkg.in/mattes/migrate.v1/driver/crate"
-	_ "gopkg.in/mattes/migrate.v1/driver/mssql"
-	_ "gopkg.in/mattes/migrate.v1/driver/mysql"
-	_ "gopkg.in/mattes/migrate.v1/driver/neo4j"
-	_ "gopkg.in/mattes/migrate.v1/driver/postgres"
-	_ "gopkg.in/mattes/migrate.v1/driver/ql"
-	_ "gopkg.in/mattes/migrate.v1/driver/sqlite3"
-	"gopkg.in/mattes/migrate.v1/file"
-	"gopkg.in/mattes/migrate.v1/migrate"
-	"gopkg.in/mattes/migrate.v1/migrate/direction"
-	pipep "gopkg.in/mattes/migrate.v1/pipe"
+	_ "github.com/mgdevstack/migrate/driver/bash"
+	_ "github.com/mgdevstack/migrate/driver/cassandra"
+	_ "github.com/mgdevstack/migrate/driver/crate"
+	_ "github.com/mgdevstack/migrate/driver/mssql"
+	_ "github.com/mgdevstack/migrate/driver/mysql"
+	_ "github.com/mgdevstack/migrate/driver/neo4j"
+	_ "github.com/mgdevstack/migrate/driver/postgres"
+	_ "github.com/mgdevstack/migrate/driver/ql"
+	_ "github.com/mgdevstack/migrate/driver/sqlite3"
+	"github.com/mgdevstack/migrate/file"
+	"github.com/mgdevstack/migrate/migrate"
+	"github.com/mgdevstack/migrate/migrate/direction"
+	pipep "github.com/mgdevstack/migrate/pipe"
 )
 
 var url = flag.String("url", os.Getenv("MIGRATE_URL"), "")

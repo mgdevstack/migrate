@@ -7,10 +7,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mattn/go-sqlite3"
-	"gopkg.in/mattes/migrate.v1/driver"
-	"gopkg.in/mattes/migrate.v1/file"
-	"gopkg.in/mattes/migrate.v1/migrate/direction"
+	"github.com/mgdevstack/migrate/driver"
+	"github.com/mgdevstack/migrate/file"
+	"github.com/mgdevstack/migrate/migrate/direction"
 )
 
 type Driver struct {

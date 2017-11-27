@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"gopkg.in/mattes/migrate.v1/file"
-	"gopkg.in/mattes/migrate.v1/migrate/direction"
-	pipep "gopkg.in/mattes/migrate.v1/pipe"
+	"github.com/mgdevstack/migrate/file"
+	"github.com/mgdevstack/migrate/migrate/direction"
+	pipep "github.com/mgdevstack/migrate/pipe"
 )
 
 // TestMigrate runs some additional tests on Migrate().
