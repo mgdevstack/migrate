@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"gopkg.in/mattes/migrate.v1/driver"
-	"gopkg.in/mattes/migrate.v1/file"
+	"github.com/mgdevstack/migrate.v1/file"
 	"gopkg.in/mattes/migrate.v1/migrate/direction"
 	pipep "gopkg.in/mattes/migrate.v1/pipe"
 )
