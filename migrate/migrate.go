@@ -12,10 +12,10 @@ import (
 	"strings"
 	"time"
 
-	"gopkg.in/mattes/migrate.v1/driver"
 	"github.com/mgdevstack/migrate.v1/file"
-	"gopkg.in/mattes/migrate.v1/migrate/direction"
-	pipep "gopkg.in/mattes/migrate.v1/pipe"
+	"github.com/mgdevstack/migrate/driver"
+	"github.com/mgdevstack/migrate/migrate/direction"
+	pipep "github.com/mgdevstack/migrate/pipe"
 )
 
 // GoTo migrates up or down to get the database to a specific version
