@@ -102,6 +102,31 @@ func (mf *MigrationFiles) ToLastFrom(version uint64) (Files, error) {
 	return files, nil
 }
 
+// ToSpecific fetches all migration files to get to the specific target version.
+func (mf *MigrationFiles) ToSpecific(version uint64, targetVersion uint64) (Files, error) {
+	var d direction.Direction
+	if targetVersion > version {
+		d = direction.Up
+	} else if targetVersion < version {
+		d = direction.Down
+	} else {
+		return nil, nil // versions match
+	}
+
+	files := make(Files, 0)
+	for _, migrationFile := range *mf {
+		if d == direction.Up && migrationFile.UpFile != nil && migrationFile.Version > version && migrationFile.Version <= targetVersion {
+			files = append(files, *migrationFile.UpFile)
+		} else if d == direction.Down && migrationFile.DownFile != nil && migrationFile.Version <= version && migrationFile.Version > targetVersion {
+			files = append(files, *migrationFile.DownFile)
+		}
+	}
+	if len(files) == 0 {
+		return nil, fmt.Errorf("insufficient migration files to migrate to version %v", targetVersion)
+	}
+	return files, nil
+}
+
 // From travels relatively through migration files.
 //
 // 		+1 will fetch the next up migration file
