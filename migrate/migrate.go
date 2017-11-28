@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mgdevstack/migrate.v1/file"
+	"github.com/mgdevstack/migrate/file"
 	"github.com/mgdevstack/migrate/driver"
 	"github.com/mgdevstack/migrate/migrate/direction"
 	pipep "github.com/mgdevstack/migrate/pipe"
